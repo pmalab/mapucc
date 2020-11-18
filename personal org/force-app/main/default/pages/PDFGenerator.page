@@ -1,0 +1,115 @@
+<apex:page controller="DataDisplayController" renderAs="pdf" lightningStylesheets="true">
+
+   <article class="slds-card">
+		<div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Order Acknowledgement</span>
+                    </h2>
+                </div>
+          		<table style="width:740px;">
+	                <tr>
+	                	<td>To: MARIA VENTIMIGLIA</td>
+	                	<td>From: MARIA VENTIMIGLIA</td>
+	                </tr> 
+	               
+	                <tr>
+	                	<td>Fax: 332-672-6318</td>
+	                	<td>Fax: 56899946924</td>
+	                </tr>
+
+	                <tr>
+	                	<td>Phone: 19469002040</td>
+	                	<td>Phone: 14906400505</td>
+	                </tr>
+            	</table>
+            </header>           
+        </div>
+	</article>
+	<article class="slds-card">
+		<div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+               
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Order Acknowledgement</span>
+                    </h2>
+                </div>
+          		<table style="width:740px;">
+	                <tr>
+	                	<td>To: MARIA VENTIMIGLIA</td>
+	                	<td>From: MARIA VENTIMIGLIA</td>
+	                </tr> 
+	               
+	                <tr>
+	                	<td>Fax: 332-672-6318</td>
+	                	<td>Fax: 56899946924</td>
+	                </tr>
+
+	                <tr>
+	                	<td>Phone: 19469002040</td>
+	                	<td>Phone: 14906400505</td>
+	                </tr>
+            	</table>
+            </header>           
+        </div>
+	</article>
+	<article class="slds-card">
+		<div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+              
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Order Acknowledgement</span>
+                    </h2>
+                </div>
+          		<table style="width:740px;">
+	                <tr>
+	                	<td>To: MARIA VENTIMIGLIA</td>
+	                	<td>From: MARIA VENTIMIGLIA</td>
+	                </tr> 
+	               
+	                <tr>
+	                	<td>Fax: 332-672-6318</td>
+	                	<td>Fax: 56899946924</td>
+	                </tr>
+
+	                <tr>
+	                	<td>Phone: 19469002040</td>
+	                	<td>Phone: 14906400505</td>
+	                </tr>
+            	</table>
+            </header>           
+        </div>
+	</article>
+	<article class="slds-card">
+		<div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+              
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Order Acknowledgement</span>
+                    </h2>
+                </div>
+          		<table style="width:740px;">
+	                <tr>
+	                	<td>To: MARIA VENTIMIGLIA</td>
+	                	<td>From: MARIA VENTIMIGLIA</td>
+	                </tr> 
+	               
+	                <tr>
+	                	<td>Fax: 332-672-6318</td>
+	                	<td>Fax: 56899946924</td>
+	                </tr>
+
+	                <tr>
+	                	<td>Phone: 19469002040</td>
+	                	<td>Phone: 14906400505</td>
+	                </tr>
+            	</table>
+            </header>           
+        </div>
+	</article>
+</apex:page>

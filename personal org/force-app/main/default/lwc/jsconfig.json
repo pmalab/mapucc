@@ -2,7 +2,59 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "c/jquery": [
+                "../staticresources/jqueryUI/jqueryUI/external/jquery/jquery.js"
+            ],
+            "c/myComponentWeb": [
+                "myComponentWeb/myComponentWeb.js"
+            ],
+            "c/helloWorld": [
+                "helloWorld/helloWorld.js"
+            ],
+            "c/appWeb": [
+                "appWeb/appWeb.js"
+            ],
+            "c/helloForEach": [
+                "helloForEach/helloForEach.js"
+            ],
+            "c/selector": [
+                "selector/selector.js"
+            ],
+            "c/bikeCard": [
+                "bikeCard/bikeCard.js"
+            ],
+            "c/apiProperty": [
+                "apiProperty/apiProperty.js"
+            ],
+            "c/list": [
+                "list/list.js"
+            ],
+            "c/myComponent": [
+                "myComponent/myComponent.js"
+            ],
+            "c/helloIterator": [
+                "helloIterator/helloIterator.js"
+            ],
+            "c/chartBar": [
+                "chartBar/chartBar.js"
+            ],
+            "c/data": [
+                "data/data.js"
+            ],
+            "c/paginatorWeb": [
+                "paginatorWeb/paginatorWeb.js"
+            ],
+            "c/detail": [
+                "detail/detail.js"
+            ],
+            "c/tile": [
+                "tile/tile.js"
+            ],
+            "c/myFirstWebComponent": [
+                "myFirstWebComponent/myFirstWebComponent.js"
+            ]
+        }
     },
     "include": [
         "**/*",
@@ -11,6 +63,11 @@
     "typeAcquisition": {
         "include": [
             "jest"
+        ]
+    },
+    "paths": {
+        "c/*": [
+            "*"
         ]
     }
 }

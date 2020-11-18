@@ -1,0 +1,5 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global">
+ <aura:attribute name="defaultVal" type="String" default="This is my community"/>
+<p>{!v.defaultVal}</p>
+
+</aura:component>

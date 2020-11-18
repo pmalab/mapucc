@@ -1,0 +1,48 @@
+<apex:page controller="AddPoolUserController" id="page" sidebar="false">
+	<script type="text/javascript">
+		function checkAll(cb)
+		{
+			//alert("in");
+			 var inputElem = document.getElementsByTagName("input");
+			 for(var i=0; i<inputElem.length; i++)
+			 {
+			   //if(inputElem[i].id.indexOf("selectOpt")!=-1)
+			   inputElem[i].checked = cb.checked;
+		     }
+		}
+    
+	</script>
+	<apex:form >
+		<!-- <apex:PageMessages id="message"/> -->
+        <!-- <apex:actionFunction action="{!AddContract}" name="showAddContract"  reRender="dateTal,dateTal1" /> -->
+		<apex:sectionHeader title="批量添加公海池成员"/>
+		<apex:pageBlock id="block1">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!doSave}" value="保存"/>
+                <apex:commandButton action="{!doCancel}" value="取消"/>
+            </apex:pageBlockButtons>
+	        <apex:pageBlockSection title="搜索结果" columns="1" id="SingleInv">
+				<apex:messages style="color:red" id="message"/>
+				<apex:outputPanel >
+					<apex:pageBlockTable value="{!innerUserList}" var="iu" width="100%" id="table1">
+					<apex:column >
+                         <apex:facet name="header">选择
+                     	 <input type="checkbox" id="chkall" onclick="checkAll(this)" /></apex:facet>
+                         <apex:inputCheckbox value="{!iu.isSelect}" id="checkUser" />
+                     </apex:column>						
+						<apex:column value="{!iu.use.Name}" headervalue="用户姓名"/>
+						<apex:column value="{!iu.use.Department}" headervalue="部门"/>
+						<apex:column value="{!iu.use.Title}" headervalue="职务"/>
+						<apex:column value="{!iu.use.MobilePhone}" headervalue="手机"/>
+						<apex:column value="{!iu.use.Email}" headervalue="电子邮件"/>
+						<!-- <apex:column headervalue="费用">
+								<apex:inputField value="{!res.money__c}"/>
+						</apex:column>	 -->
+						
+					</apex:pageBlockTable> 			
+				</apex:outputPanel>
+			</apex:pageBlockSection>
+		</apex:pageBlock>
+
+	</apex:form>
+</apex:page>
