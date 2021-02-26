@@ -21,7 +21,8 @@ global with sharing class AccountManager {
         List<Account> accList =  [SELECT ID,NAME,(SELECT ID,NAME FROM Contacts)
                         FROM Account
                         WHERE Id = :accId];
-        System.debug('==>>'+accList);
+        // System.debug('==>>'+accList);
+        System.debug('==>>'+accList.size());
         return accList;
     }
 }
