@@ -1,0 +1,115 @@
+<!-- 
+ sherlock.chen@celnet.com.cn
+ 2018-01-28
+
+ -->
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" controller="AccountListDMLController">
+	<!-- 初始化方法 -->
+	<aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+	<!-- 页面用到的变量 -->
+	<aura:attribute name="accountlist" type="List"/>
+	<aura:attribute name="selectedCount" type="integer" default="0"/>
+
+	<!-- 定义外部的内容 -->
+	<article class="slds-card">
+		<!--页面加载动画Loading-->
+		<lightning:spinner aura:id="mySpinner" variant="brand" title="loading"/>
+		<div class="slds-card__header slds-grid">
+			<header class="slds-media slds-media_center slds-has-flexi-truncate">
+				<div class="slds-media__figure">
+					<span class="slds-icon_container slds-icon-standard-account" title="description of icon when needed">
+						<!-- 客户图标 -->
+						<lightning:icon iconName="standard:account" />
+					</span>
+				</div>
+				<div class="slds-media__body">
+					<h2>
+						<a href="javascript:void(0);" class="slds-card__header-link slds-truncate">
+							<span class="slds-text-heading_small">批量添加客户</span>
+						</a>
+					</h2>
+					<br></br>
+					<span class="slds-badge">已选择客户:{!v.selectedCount}</span>
+					
+				</div>
+			</header>
+			<div class="slds-no-flex">
+		       <lightning:button variant="brand" label="添加行" iconName="action:new" iconPosition="right" onclick="{!c.addRow}"/>
+				<lightning:button variant="brand" label="删除行" iconName="action:remove" iconPosition="right" onclick="{!c.delRow}"/>
+		        <lightning:button variant="brand" label="保存" iconName="action:approval" iconPosition="right" onclick="{!c.saveAll}"/>
+		        <lightning:button variant="brand" label="删除客户" iconName="action:remove" iconPosition="right" onclick="{!c.confirmDel}"/>
+			</div>
+		</div>
+		<div class="slds-card__body">
+			<table class="slds-table slds-table--bordered slds-table--cell-buffer">
+				<thead>
+		          	<tr class="slds-text-title--caps">
+			            <th scope="col" style="width:3.25rem;" class="slds-text-align--right">
+			                <ui:inputCheckbox aura:id="Allbox"  change="{!c.selectAll}"/>
+			            </th>
+			            <th scope="col">
+			              	<div class="slds-truncate" title="Opportunity Name">客户名</div>
+			            </th>
+			            <th scope="col">
+			              	<div class="slds-truncate" title="Account Name">电话</div>
+			            </th>
+			            <th scope="col">
+			              	<div class="slds-truncate" title="Account Source">客户来源</div>
+			            </th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		        	<aura:iteration items="{!v.accountlist}" var="obj">
+		        		<tr>
+		        			<td>
+			                	<ui:inputCheckbox aura:id="box" value="{!obj.checkbox}"/>
+			              	</td>
+			              	<td>
+ 			                    
+ 			                    <lightning:input value="{!obj.Name}"  type="text" required="true"/>
+			              	</td>
+			              	<td>
+			                    <lightning:input label="" value="{!obj.Phone}" type="text"/>
+			              	</td>
+			              	<td>
+				                <lightning:select label="" value="{!obj.AccountSource}">
+					                  <option value="none">none</option>
+					                  <option value="Web">Web</option>
+					                  <option value="Phone Inquiry">Phone Inquiry</option>
+					                  <option value="Partner Referral">Partner Referral</option>
+				                </lightning:select>
+			              	</td>
+		        		</tr>
+		        	</aura:iteration>
+		        </tbody>
+			</table>
+		</div>
+		<div class="slds-card__footer slds-grid">
+			<div class="slds-no-flex">
+		       <lightning:button variant="brand" label="添加行" iconName="action:new" iconPosition="left" onclick="{!c.addRow}"/>
+				<lightning:button variant="brand" label="删除行" iconName="action:remove" iconPosition="left" onclick="{!c.delRow}"/>
+		        <lightning:button variant="brand" label="保存" iconName="action:approval" iconPosition="left" onclick="{!c.saveAll}"/>
+		        <lightning:button variant="brand" label="删除客户" iconName="action:remove" iconPosition="left" onclick="{!c.confirmDel}"/>
+			</div>
+		</div>
+		<footer class="slds-card__footer">{!v.accountlist.length}条记录</footer>
+		<!--弹出层,删除客户提示-->
+		<div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open" aura:id="comfirmDialog">
+			<div class="slds-modal__container">
+				<div class="slds-modal__header">
+					<button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.confirmDel}">
+	          			<lightning:icon iconName="utility:close" variant="bare" alternativeText="关闭"/>
+	          		</button>
+	          		<h2 id="header43" class="slds-text-heading--medium">删除客户</h2>
+				</div>
+				<div class="slds-modal__content slds-p-around--medium" style="text-align: center">确认删除选中的客户么?</div>
+		        <div class="slds-modal__footer">
+		          	<button class="slds-button slds-button--neutral" onclick="{!c.confirmDel}">取消</button>
+		          	<button class="slds-button slds-button--brand" onclick="{!c.delAccount}">确认</button>
+		        </div>
+			</div>
+		</div>
+		<div class="slds-backdrop slds-backdrop--open" aura:id="comfirmDialogBackdrop"></div>
+	</article>
+	
+</aura:component>

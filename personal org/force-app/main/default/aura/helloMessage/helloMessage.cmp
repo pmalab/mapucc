@@ -1,4 +1,0 @@
-<aura:component implements="force:appHostable">
-    <aura:attribute name="message" type="String"/>
-    <p>{!'Hello! ' + v.message}</p>
-</aura:component>

@@ -1,3 +1,0 @@
-<design:component label="visibleCmp">
-    <design:attribute name="defaultVal" label="show value" description="show text value"/>
-</design:component>

@@ -1,0 +1,38 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader,force:appHostable" access="global" >
+
+  <lightning:workspaceAPI aura:id="workspace"/>
+    <aura:attribute name="showSpin" type="boolean" default="false"/>
+
+    <aura:attribute name="masterCase" type="Object"/>
+  
+
+ <section role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+    <div class="slds-modal__container">
+        <div class="slds-modal__header">
+            <button class="slds-button slds-modal__close slds-button--icon-inverse" title="Close" onclick="{!c.closeModal}">
+                X<span class="slds-assistive-text">Cancel</span>
+            </button>
+            <h2 id="header43" class="slds-text-heading--medium">Message</h2>
+        </div>
+        <div class="slds-modal__content slds-p-around--medium">
+            <div class="slds-grid slds-wrap">
+                <div class="slds-size--1-of-1">
+                    Do you want to creat a supplemental complaint?
+                </div>
+            </div>
+        </div>
+        <div class="slds-modal__footer">
+            <lightning:button class="slds-button slds-button--neutral" onclick="{!c.closeModal}">Cancel</lightning:button>
+            <lightning:button class="slds-button slds-button--brand" onclick="{!c.CreateSupplementalCase}">Confirm</lightning:button>
+        </div>
+    </div>
+</section>
+<div class="slds-backdrop slds-backdrop_open"></div>
+
+    <aura:if isTrue="{!v.showSpin}">
+
+        <div class="slds-modal slds-fade-in-open slds-modal--prompt">
+            <lightning:spinner variant="brand" size="large"/>
+        </div>
+    </aura:if>
+</aura:component>

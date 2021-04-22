@@ -1,0 +1,20 @@
+<aura:component >
+    <lightning:layout class="slds-page-header slds-page-header--object-home">
+        <lightning:layoutItem >
+            <lightning:icon iconName="action:goal" alternativeText="Camping List"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <H1>Camping List</H1>
+                <H2 class="slds-text-heading--medium">My Camping List</H2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+    <!-- / PAGE HEADER -->
+    <!-- NEW EXPENSE FORM -->
+    <lightning:layout >
+        <lightning:layoutItem padding="around-small" size="6">
+         
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

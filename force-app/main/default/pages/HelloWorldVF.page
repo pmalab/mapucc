@@ -1,0 +1,19 @@
+<apex:page controller="HelloWorldController">
+	
+	{!result}
+
+	<br/>
+	<apex:form >
+		<apex:actionRegion >
+			<apex:selectList label="{!$objectType.Account.Fields.Name.Label}" id="accountSelect" value="{!selectedAccountId}" size="1" >
+				<apex:selectOptions value="{!Accounts}"/>
+				<apex:actionSupport event="onchange" action="{!searchContactsByAccountId}" reRender="ContactSelect"/>
+			</apex:selectList>
+		</apex:actionRegion>
+
+
+		<apex:selectList label="{!$objectType.Contact.Fields.Name.Label}" id="ContactSelect" size="1">
+			<apex:selectOptions value="{!listContactItems}"/>
+		</apex:selectList>
+	</apex:form>
+</apex:page>

@@ -1,3 +1,0 @@
-<apex:page controller="myController">
-    {!mystring},{!stringmethod1},{!stringmethod2},{!mystring} 
-    </apex:page>

@@ -1,0 +1,55 @@
+<!-- 
+ sherlock.chen@celnet.com.cn
+ 2018-01-15
+ 搜索客户，进行展示
+-->
+<aura:component controller="SearchAccountController" implements="flexipage:availableForAllPageTypes,force:appHostable" description="客户查询">
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+	<aura:attribute name="results" type="List" description="后台查询的Account List"/>
+	<aura:attribute name="searchKey" type="String" description="搜索框input属性"/>
+	<aura:attribute name="recordsNum" type="Integer" default="0" description="查询条数"/>
+	<aura:attribute name="message" type="boolean" default="false" description="未查询到的客户，进行提示"/>
+
+	<div class="slds-m-around--large">
+		<form class="slds-form--inline">
+			<div class="slds-form-element">
+				<label class="slds-form-element__label" for="search"></label>
+				<div class="slds-form-element__control">
+					<ui:inputText aura:id="searchKeyId" class="slds-input" value="{!v.searchKey}" required="true" placeholder="请输入搜索条件..."/>			
+				</div>
+			</div>
+			<div class="slds-form-element">
+				<button type="button" class="slds-button slds-button--brand" onclick="{!c.doSearch}">搜索</button>
+			</div>
+		</form>
+		<span class="slds-badge">共{!v.recordsNum}条记录</span>
+		<table  class="slds-table slds-table--bordered slds-table--cell-buffer">
+			<thead>
+				<tr class="slds-text-title--caps">
+					<th scope="col"><div class="slds-truncate">Id</div></th>
+					<th scope="col"><div class="slds-truncate">Account Name</div></th>
+					<th scope="col"><div class="slds-truncate">Type</div></th>
+					<th scope="col"><div class="slds-truncate">Industry</div></th>
+					<th scope="col"><div class="slds-truncate">Phone</div></th>
+					<th scope="col"><div class="slds-truncate">Fax</div></th>
+				</tr>
+			</thead>
+			<tbody>
+				<aura:if isTrue="{!v.message}">
+					<div class="slds-text-color--error">没有查询到客户...</div>
+				</aura:if>
+				<aura:iteration items="{!v.results}" var="item">
+					<tr>
+						<td><div class="slds-truncate">{!item.Id}</div></td>
+						<td><div class="slds-truncate">{!item.Name}</div></td>
+						<td><div class="slds-truncate">{!item.Type}</div></td>
+						<td><div class="slds-truncate">{!item.Industry}</div></td>
+						<td><div class="slds-truncate">{!item.Phone}</div></td>
+						<td><div class="slds-truncate">{!item.Fax}</div></td>
+					</tr>					
+				</aura:iteration>
+			</tbody>
+		</table>
+	</div>
+</aura:component>

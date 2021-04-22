@@ -1,0 +1,10 @@
+<aura:component controller="UpdateProductStatusController" implements="force:lightningQuickActionWithoutHeader,force:hasRecordId" access="global" >
+   <aura:attribute name="inventory" type="Product__c"/>
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+<div class="slds-page-header" role="banner">
+   <h1 class="slds-page-heading--label">Are you sure you want to update the status?</h1>
+</div>
+   <lightning:button label="Yes" onclick="{!c.requestCall}" class="slds-m-top--medium"/>
+   <lightning:button label="No" onclick="{!c.cancelCall}" class="slds-m-top--medium"/>
+ 
+</aura:component>
