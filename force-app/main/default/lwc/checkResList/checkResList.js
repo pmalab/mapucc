@@ -40,6 +40,9 @@ export default class CheckResList extends NavigationMixin(LightningElement) {
     @track recordTypes;
     @track resb;
     @track data;
+    @track reid;
+    @track money;
+    @track isChecked = false;
 
     @wire(getRecord, { recordId: '$recordID', fields })
     wiredRecord({ error, data }) {
@@ -101,6 +104,36 @@ export default class CheckResList extends NavigationMixin(LightningElement) {
         console.log(this.data)
         this.showSpin = false;
         // this.dispatchEvent(new CustomEvent('closemodal'));
+    }
+
+    handleFieldChange(event){
+        const field = event.target.name;
+        if(field === 'money'){  
+            this.reid = event.currentTarget.dataset.reid;
+            this.money = event.target.value;
+            let reObj = this.data.filter(d => d.id === this.reid);
+            reObj[0].money = this.money;
+        }
+        if(field === 'checkbox'){
+            var childChecked = event.target.checked;
+            this.reid = event.currentTarget.dataset.reid;
+            let reObj = this.data.filter(d => d.id === this.reid);
+            reObj[0].flag = childChecked;
+            this.isChecked = true;
+            this.data.forEach(element => {
+                if(element.flag == false){
+                    this.isChecked = false;
+                    return;
+                }
+            });
+        }
+    }
+
+    selectAllOrNotSelectAll(event){
+        this.isChecked = event.target.checked;
+        this.data.forEach(element => {
+            element.flag = this.isChecked;
+        });
     }
 
 }

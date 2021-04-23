@@ -15,7 +15,7 @@
                   <thead>
                     <tr class="slds-text-title_caps">
                         <th scope="col" style="width:3.25rem;">
-                            <lightning-input type="checkbox" data-field="se">
+                            <lightning-input type="checkbox" data-field="se" checked={isChecked} onchange={selectAllOrNotSelectAll}>
                             </lightning-input>
                         </th>
                         <th scope="col" style="width:20%;">
@@ -37,7 +37,8 @@
                     <template for:each={data} for:item="payment">
                         <tr class="slds-hint-parent" key={payment.id}>
                             <td>
-                                <lightning-input type="checkbox" checked={payment.flag}>
+                                <lightning-input type="checkbox" name="checkbox" checked={payment.flag} onchange={handleFieldChange}
+                                data-reid={payment.id}>
                                 </lightning-input>
                             </td>
                             <td>
@@ -53,8 +54,12 @@
                             <td>
                                 <div class="slds-truncate" title="">
                                     <lightning-input
+                                                    name="money"
                                                     step=".01"
-                                                    value={payment.money}>
+                                                    value={payment.money}
+                                                    onchange={handleFieldChange}
+                                                    data-reid={payment.id}
+                                                    >
                                     </lightning-input>
                                     <!-- <lightning-formatted-text value={payment.money} ></lightning-formatted-text> -->
                                 </div>
