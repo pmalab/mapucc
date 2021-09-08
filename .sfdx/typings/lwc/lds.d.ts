@@ -1119,8 +1119,11 @@ declare module 'lightning/analyticsWaveApi' {
      * Creates a Tableau CRM dataflow job, which is the equivalent of clicking Run Now for a data prep recipe, a data sync,
      * or a dataflow in the Tableau CRM Data Manager UI.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_analytics_create_dataflow_job
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param dataflowJob.dataflowId The dataflow, data prep recipe, or data sync ID for the job.
      * @param dataflowJob.command The job command to execute. Must be `Start` to create a dataflow job.
      * @return A promise that will resolve to the dataflow job response.
@@ -1130,8 +1133,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Deletes a specific Tableau CRM dataset by ID or developer name.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_analytics_delete_dataset
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param datasetIdOrApiName The ID or developer name of the dataset.
      * @return A promise that will resolve on completion.
      */
@@ -1140,8 +1146,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Deletes a specific Tableau CRM data prep recipe by ID.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_analytics_delete_recipe
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param id The ID of the data prep recipe.
      * @return A promise that will resolve on completion.
      */
@@ -1150,8 +1159,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to execute a Tableau CRM query.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_analytics_execute_query
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param query.query The query string to execute.
      * @param query.queryLanguage The query language. Valid values are `SAQL` or `SQL`. The default is `SAQL`.
      * @param query.timezone The timezone for the query.
@@ -1161,8 +1173,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve the Analytics limits for Tableau CRM.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_analytics_limits
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param licenseType The response includes dataflow jobs with this license type. Valid values are `EinsteinAnalytics` or `Sonic`.
      * @param types The types of limits used in Tableau CRM.
      *              Valid values are `BatchTransformationHours`, `DatasetQueries`, `DatasetRowCount`,
@@ -1175,8 +1190,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a specific Tableau CRM dataflow job.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_dataflow_job
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param dataflowjobId The ID of the dataflow job.
      */
     export function getDataflowJob(dataflowjobId: string): void;
@@ -1184,8 +1202,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a specific Tableau CRM dataflow job node for a recipe or dataflow.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_dataflow_job_node
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param dataflowjobId The ID of the dataflow job.
      * @param nodeId The ID of the node.
      */
@@ -1194,8 +1215,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a collection of Tableau CRM dataflow job nodes.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_dataflow_job_nodes
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param dataflowjobId The ID of the dataflow job.
      */
     export function getDataflowJobNodes(dataflowjobId: string): void;
@@ -1203,8 +1227,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a collection of Tableau CRM dataflow jobs.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_dataflow_jobs
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param dataflowId Filters the collection to only contain dataflow jobs tied to this specific dataflow. The ID must start with '02K'.
      * @param licenseType The response includes dataflow jobs with this license type. Valid values are `EinsteinAnalytics` or `Sonic`.
      * @param page Generated token that indicates the view of dataflow jobs to be returned.
@@ -1220,16 +1247,22 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a specific Tableau CRM dataset by ID or developer name.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_dataset
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param datasetIdOrApiName The ID or developer name of the dataset.
      */
     export function getDataset(datasetIdOrApiName: string): void;
 
     /** Wire adapter to retrieve a collection of Tableau CRM datasets.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_datasets
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param datasetTypes Filters the collection to include only datasets of one or more of the specified types.
      *                     Valid values are `Default`, `Live`, or `Trended`.
      * @param folderId Filters the collection to only contain datasets for the specified folder. The ID can be the requesting user's ID for
@@ -1266,8 +1299,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a specific Tableau CRM data prep recipe by ID.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_recipe
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param id The ID of the recipe.
      * @param format Specifies the format of the returned recipe. Valid values are `R2 or `R3`. The default is `R3`.
      */
@@ -1276,8 +1312,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a collection of Tableau CRM data prep recipes.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_recipes
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param format Filters the collection to include only recipes of the specified format. Valid values are `R2` or `R3`.
      * @param licenseType The response includes dataflow jobs with this license type. Valid values are `EinsteinAnalytics` or `Sonic`.
      * @param page Generated token that indicates the view of recipes to be returned.
@@ -1293,8 +1332,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a collection of Tableau CRM replicated datasets, also known as connected objects.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_replicated_datasets
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param category Filters the collection to include only connected objects of the specified category. Valid values are `Input` or `Output`.
      * @param connector Filters the collection to include only connected objects belonging to the specified Tableau CRM connector.
      * @param sourceObject Filters the collection to include only connected objects belonging to the specified source object.
@@ -1304,8 +1346,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a schedule for a Tableau CRM recipe, dataflow, or data sync.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_schedule
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param assetId The ID of the dataflow, recipe, or data sync.
      */
     export function getSchedule(assetId: string): void;
@@ -1313,8 +1358,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a collection of Tableau CRM apps or folders.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_wave_folders
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param isPinned Filters the collection to include only folders which are pinned (`true`) or not (`false`). The default is `false`.
      * @param mobileOnlyFeaturedAssets Filters the collection to only contain folders which contain dashboards that are enabled for the
      *                                 Tableau CRM mobile app. The default is `false`.
@@ -1343,8 +1391,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Wire adapter to retrieve a specific Tableau CRM extended metadata type (Xmd) for a version of a dataset.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_wire_adapters_get_xmd
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param datasetIdOrApiName The ID or developer name of the dataset.
      * @param versionId The ID of the dataset version.
      * @param xmdType The xmd type. Valid values are `Asset`, `Main`, `System`, or `User`.
@@ -1354,8 +1405,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Updates a Tableau CRM dataflow job, which is the equivalent of clicking Stop for a data prep recipe, a data sync, or a dataflow in the Tableau CRM Data Manager UI.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_analytics_update_dataflow_job
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param dataflowJobId The dataflow job ID.
      * @param dataflowJob.command The job command to execute. Must be `stop` to update a dataflow job.
      * @return A promise that will resolve to the dataflow job response.
@@ -1371,8 +1425,11 @@ declare module 'lightning/analyticsWaveApi' {
     /**
      * Updates the schedule for a Tableau CRM data prep recipe, data sync, or dataflow.
      *
+<<<<<<< HEAD
      * https://developer.salesforce.com/docs/component-library/documentation/en/lwc/reference_analytics_update_schedule
      *
+=======
+>>>>>>> 3c74c1b0d66a4aed83be2a20b5e57e98139a0849
      * @param assetId The ID of the dataflow, recipe, or data sync.
      * @param schedule The schedule to create or update for the dataflow, recipe, or data sync. Use a
      *                 {@link https://developer.salesforce.com/docs/atlas.en-us.bi_dev_guide_rest.meta/bi_dev_guide_rest/bi_resources_appendix.htm#ScheduleInputRepresentation|ScheduleInputRepresentation}.
