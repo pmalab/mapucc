@@ -1,0 +1,28 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <lightning-quick-action-panel header="Quick Contact Edit">
+        <div class="model-container slds-is-relative">
+            <template if:true={showSpin}>
+                <div class="loading-wrapper">
+                    <lightning-spinner alternative-text="Loading" variant="brand"></lightning-spinner>
+                    <!-- <div style="position: fixed;" class="slds-backdrop slds-backdrop_open"></div> -->
+                </div>
+            </template>     
+                <lightning-input label="First Name" name="firstName" value={firstName} class="slds-m-bottom_x-small" onchange={handleChange}></lightning-input>
+                <lightning-input label="Last Name" name="lastName" value={lastName} onchange={handleChange} class="slds-m-bottom_x-small" required></lightning-input>
+                <lightning-input label="Phone" type="tel" name="phone" value={phone} onchange={handleChange} class="slds-m-bottom_x-small"></lightning-input>
+
+            <div class="modal-footer slds-modal__footer slds-size_1-of-1">
+                <lightning-button variant="neutral" label="Cancel" onclick={handleCancel}></lightning-button>
+                <lightning-button variant="brand" class="slds-m-left_x-small" label="Save" type="submit" onclick={handleSubmit} disabled={disabled}></lightning-button>
+            </div>
+
+            <!-- <div class="loading">
+                <template if:true={loading}>
+                    <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+                    <div style="position: fixed;" class="slds-backdrop slds-backdrop_open"></div>
+                </template>
+            </div> -->
+        </div>
+</lightning-quick-action-panel>
+</template>
