@@ -1,5 +1,7 @@
+/**
+ * Author: John
+ */
 public without sharing class AccountHandler {
-    
 
     public static Account insertNewAccount(String name){
 
