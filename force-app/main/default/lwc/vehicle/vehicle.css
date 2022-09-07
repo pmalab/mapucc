@@ -1,0 +1,16 @@
+.ele1{
+    background-color: #BBB;
+    padding:50px;
+    border-radius: 25px;
+    margin-top:20px;
+    margin-left:10px;
+    margin-right:10px;
+    cursor: pointer;
+}
+
+.subComp{
+    background-color: #fff;
+    border-radius: 25px;
+    margin:10px;
+    padding:30px;
+}

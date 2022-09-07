@@ -1,0 +1,71 @@
+<template>
+    <div class="slds-m-top_xx-small slds-m-bottom_xx-small slds-p-top_ slds-p-bottom_xx-small"
+        style={calendarContainerStyle}>
+        <div class="slds-grid slds-grid_align-space slds-m-bottom_xx-small">
+            <div class="slds-col slds-size_2-of-6">
+                <div class="slds-button-group" role="group">
+                    <button class="slds-button slds-button_neutral prevButton slds-truncate" onclick={toPrevMonth}>
+                        <span>
+                            <lightning-icon icon-name="utility:chevronleft" alternative-text="close" size="x-small">
+                            </lightning-icon>
+                        </span>
+                        <span class="slds-assistive-text">Prev Month</span>
+                    </button>
+                    <button class="slds-button slds-button_neutral nextButton slds-truncate" onclick={toNextMonth}>
+                        <span>
+                            <lightning-icon icon-name="utility:chevronright" alternative-text="close" size="x-small">
+                            </lightning-icon>
+                        </span>
+                        <span class="slds-assistive-text">Next Month</span>
+                    </button>
+                </div>
+            </div>
+            <div class="slds-col slds-size_2-of-6 slds-grid slds-grid_align-end">
+                <div class="slds-col">
+                    <div class="slds-col monthNowText">
+                        {monthNowText}&nbsp;
+                    </div>
+                    <div class="slds-col yearNowText">
+                        &nbsp;{yearNow}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div data-id="monthView">
+            <div class="slds-grid slds-grid_vertical slds-col" style="border:1px solid #DDDBDA;">
+                <div class="slds-col slds-grid">
+                    <template for:each={columns} for:item="column" for:index="index">
+                        <div key={column.id} title={column.label}
+                            class="slds-col slds-grid slds-grid_align-center slds-size_1-of-7"
+                            style={calendarHeadStyle}>
+                            <div title={column.label}>{column.label}</div>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-col slds-grid slds-grid_vertical slds-scrollable">
+                    <template for:each={calendarData} for:item="item">
+                        <div key={item.index} class="slds-col slds-grid">
+                            <template for:each={item.items} for:item="childItem">
+                                <div key={childItem.label}
+                                    class="slds-col slds-size_1-of-7 slds-grid slds-grid_vertical dateTile"
+                                    style={calendarCellStyle} data-datestring={childItem.dateString}
+                                    onclick={dateTileClickHandler}>
+                                    <div class="slds-col slds-grid slds-grid_vertical">
+                                        <div data-rowindex={item.index} data-columnindex={childItem.index}
+                                            class="slds-col slds-grid slds-grid_align-center">
+                                            <div class="slds-col slds-grid slds-grid_align-center">
+                                                <div data-datestatus={childItem.status} class="slds-text-heading_small">
+                                                    {childItem.label}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

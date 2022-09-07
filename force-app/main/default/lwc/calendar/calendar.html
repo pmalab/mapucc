@@ -1,0 +1,451 @@
+<template>
+    <div class="slds-m-top_medium slds-m-bottom_medium slds-p-top_medium slds-p-bottom_medium"
+        style={calendarContainerStyle}>
+        <div class="slds-grid slds-grid_align-space slds-m-bottom_medium">
+            <div class="slds-col slds-size_2-of-6">
+                <div class="slds-button-group" role="group">
+                    <button class="slds-button slds-button_neutral prevButton slds-truncate preMonthButtonDisabled" onclick={toPrevMonth} disabled>
+                        <span>
+                            <lightning-icon icon-name="utility:chevronleft" alternative-text="close" size="x-small">
+                            </lightning-icon>
+                        </span>
+                        <span class="slds-assistive-text">Prev Month</span>
+                    </button>
+                    <button class="slds-button slds-button_brand todayButton slds-truncate"
+                        onclick={toToday}>Today</button>
+                    <button class="slds-button slds-button_neutral nextButton slds-truncate nextMonthButtonDisabled" onclick={toNextMonth}>
+                        <span>
+                            <lightning-icon icon-name="utility:chevronright" alternative-text="close" size="x-small">
+                            </lightning-icon>
+                        </span>
+                        <span class="slds-assistive-text">Next Month</span>
+                    </button>
+                </div>
+            </div>
+            <div class="slds-col slds-size_2-of-6 slds-grid slds-grid_align-center">
+                <div class="slds-col slds-grid slds-grid_align-center slds-size_6-of-6">
+                    <template if:true={showMonthYearChoose}>
+                        <div class="slds-grid slds-col slds-size_5-of-6 monthYearChooseContainer">
+                            <div class="slds-col slds-size_3-of-6">
+                                <div class="slds-col monthChoose">
+                                    <lightning-combobox value={monthNow} options={monthOptions}
+                                        onchange={handleMonthChoose} class="monthCombobox">
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_3-of-6">
+                                <div class="slds-col monthChoose">
+                                    <lightning-combobox value={yearNow} onchange={handleMonthChoose}
+                                        class="monthCombobox">
+                                    </lightning-combobox>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+
+                    <template if:false={showMonthYearChoose}>
+                        <div class="slds-col slds-truncate slds-text-heading_large slds-grid slds-grid_align-spread"
+                            onclick={clickMonthYearHandler}>
+                            <div class="slds-col monthNowText">
+                                {monthNowText}&nbsp;
+                            </div>
+                            <div class="slds-col yearNowText">
+                                &nbsp;{yearNow}
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+            <div class="slds-col slds-size_2-of-6 slds-grid slds-grid_align-end">
+                <div class="slds-col">
+                    <button class="slds-button slds-button_neutral" onclick={newEvent}>New event</button>
+                    <button class="slds-button slds-button_neutral" onclick={toWeekView}>Week</button>
+                </div>
+            </div>
+        </div>
+        <div data-id="monthView">
+            <div class="slds-grid slds-grid_vertical slds-col" style="border:1px solid #DDDBDA;">
+                <div class="slds-col slds-grid">
+                    <template for:each={columns} for:item="column" for:index="index">
+                        <div key={column.id} title={column.label}
+                            class="slds-col slds-grid slds-grid_align-center slds-size_1-of-7"
+                            style={calendarHeadStyle}>
+                            <div title={column.label}>{column.label}</div>
+                        </div>
+                    </template>
+                </div>
+                <div class="slds-col slds-grid slds-grid_vertical slds-scrollable">
+                    <template for:each={calendarData} for:item="item">
+                        <div key={item.index} class="slds-col slds-grid">
+                            <template for:each={item.items} for:item="childItem">
+                                <div key={childItem.label}
+                                    class="slds-col slds-size_1-of-7 slds-grid slds-grid_vertical dateTile"
+                                    style={calendarCellStyle} data-datestring={childItem.dateString}
+                                    onclick={dateTileClickHandler}>
+                                    <template if:true={childItem.haveMoreEvents}>
+                                        <template if:true={childItem.showMoreEvents}>
+                                            <div class="eventModalContainer" onclick={stopBubble}>
+                                                <div
+                                                    class="slds-p-top_x-small slds-p-bottom_x-small slds-p-left_x-small slds-p-right_x-small">
+                                                    <div class="slds-grid slds-grid_align-center">
+                                                        <div
+                                                            class="slds-grid slds-col slds-grid_align-spread slds-m-bottom_x-small slds-size_11-of-12">
+                                                            <div class="slds-text-heading_small slds-col">
+                                                                {childItem.label}</div>
+                                                            <div class="slds-col ">
+                                                                <button class="slds-button slds-button_icon"
+                                                                    title="Close" data-type="close"
+                                                                    onclick={closeMoreEvents}>
+                                                                    <span>
+                                                                        <lightning-icon icon-name="utility:close"
+                                                                            alternative-text="close" size="x-small">
+                                                                        </lightning-icon>
+                                                                    </span>
+                                                                    <span class="slds-assistive-text">Close</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-scrollable" style="height: 100px;">
+                                                        <template for:each={childItem.itemsMulti} for:item="eventItem">
+                                                            <div key={eventItem.label}
+                                                                class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center calendarCellEventTextMulti"
+                                                                title={eventItem.label}
+                                                                data-datestart={eventItem.dateStart}
+                                                                data-dateend={eventItem.dateEnd}
+                                                                onclick={eventClickHandler}
+                                                                data-description={eventItem.description}
+                                                                data-id={eventItem.eventId} data-i={eventItem.i}
+                                                                data-j={eventItem.j} data-type={eventItem.eventType}>
+                                                                <div class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small"
+                                                                    title={eventItem.label}>
+                                                                    <text title={eventItem.label}
+                                                                        style="font-weight: bold;">Multi</text>&nbsp;{eventItem.label}
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                        <template for:each={childItem.items} for:item="eventItem">
+                                                            <div key={eventItem.label}
+                                                                class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center calendarCellEventText"
+                                                                title={eventItem.label} onclick={eventClickHandler}
+                                                                data-datetime={eventItem.dateTime}
+                                                                data-description={eventItem.description}
+                                                                data-id={eventItem.eventId} data-i={eventItem.i}
+                                                                data-j={eventItem.j} data-type={eventItem.eventType}>
+                                                                <div
+                                                                    class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small">
+                                                                    <text title={eventItem.label}
+                                                                        style="font-weight: bold;">{eventItem.labelTime}</text>&nbsp;{eventItem.label}
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </template>
+                                    </template>
+                                    <div class="slds-col slds-grid slds-grid_vertical">
+                                        <div data-rowindex={item.index} data-columnindex={childItem.index}
+                                            class="slds-col slds-grid slds-grid_align-center">
+                                            <div class="slds-col slds-grid slds-grid_align-center">
+                                                <div data-datestatus={childItem.status} class="slds-text-heading_small">
+                                                    {childItem.label}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div data-datestring={childItem.dateString} data-type="tile"
+                                            class="slds-col slds-grid slds-grid_align-center calendarCellEventStyle">
+                                            <div
+                                                class="slds-col slds-grid slds-grid_vertical slds-size_11-of-12 slds-p-top_xx-small ">
+                                                <template if:false={childItem.haveMoreEvents}>
+                                                    <template for:each={childItem.itemsMulti} for:item="eventItem">
+                                                        <div key={eventItem.label}
+                                                            class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center calendarCellEventTextMulti"
+                                                            title={eventItem.label} data-datestart={eventItem.dateStart}
+                                                            data-dateend={eventItem.dateEnd} onclick={eventClickHandler}
+                                                            data-description={eventItem.description}
+                                                            data-id={eventItem.eventId} data-i={eventItem.i}
+                                                            data-j={eventItem.j} data-type={eventItem.eventType}>
+                                                            <div
+                                                                class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small">
+                                                                <text title={eventItem.label}
+                                                                    style="font-weight: bold;">Multi</text>&nbsp;{eventItem.label}
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                    <template for:each={childItem.items} for:item="eventItem">
+                                                        <div key={eventItem.label}
+                                                            class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center calendarCellEventText"
+                                                            title={eventItem.label} onclick={eventClickHandler}
+                                                            data-datetime={eventItem.dateTime}
+                                                            data-description={eventItem.description}
+                                                            data-id={eventItem.eventId} data-i={eventItem.i}
+                                                            data-j={eventItem.j} data-type={eventItem.eventType}>
+                                                            <div
+                                                                class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small">
+                                                                <text title={eventItem.label}
+                                                                    style="font-weight: bold;">{eventItem.labelTime}</text>&nbsp;{eventItem.label}
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </template>
+                                                <template if:true={childItem.haveMoreEvents}>
+                                                    <template for:each={childItem.itemsMultiShow} for:item="eventItem">
+                                                        <div key={eventItem.label}
+                                                            class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center calendarCellEventTextMulti"
+                                                            title={eventItem.label} data-datestart={eventItem.dateStart}
+                                                            data-dateend={eventItem.dateEnd} onclick={eventClickHandler}
+                                                            data-description={eventItem.description}
+                                                            data-id={eventItem.eventId} data-i={eventItem.i}
+                                                            data-j={eventItem.j} data-type={eventItem.eventType}>
+                                                            <div
+                                                                class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small">
+                                                                <text title={eventItem.label}
+                                                                    style="font-weight: bold;">Multi</text>&nbsp;{eventItem.label}
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                    <template for:each={childItem.itemsShow} for:item="eventItem">
+                                                        <div key={eventItem.label}
+                                                            class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center calendarCellEventText"
+                                                            title={eventItem.label} onclick={eventClickHandler}
+                                                            data-datetime={eventItem.dateTime}
+                                                            data-description={eventItem.description}
+                                                            data-id={eventItem.eventId} data-i={eventItem.i}
+                                                            data-j={eventItem.j} data-type={eventItem.eventType}>
+                                                            <div
+                                                                class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small">
+                                                                <text title={eventItem.label}
+                                                                    style="font-weight: bold;">{eventItem.labelTime}</text>&nbsp;{eventItem.label}
+                                                            </div>
+                                                        </div>
+                                                    </template>
+
+                                                    <div data-i={childItem.i} data-j={childItem.j}
+                                                        class="slds-col slds-m-bottom_xx-small slds-grid slds-grid_align-center moreEventContainer">
+                                                        <div
+                                                            class="slds-truncate slds-col slds-size_11-of-12 slds-text-body_small moreEventText">
+                                                            <a data-i={childItem.i} data-j={childItem.j}
+                                                                onclick={clickMoreEvents}>+{childItem.eventCount}
+                                                                more</a>
+                                                        </div>
+                                                    </div>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+        <div data-id="weekView">
+            <div class="slds-grid slds-grid_vertical slds-col" style="border:1px solid #DDDBDA;">
+
+            </div>
+        </div>
+
+
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class={createModalCss}>
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_large slds-hyphenate">
+                            Please enter the information:
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <div class="slds-grid slds-grid_align-center">
+                            <div class="slds-size_2-of-3">
+                                <lightning-radio-group name="Please choose the type:" label="Please choose the type:"
+                                    options={eventTypeList} value={eventInputType} onchange={handleEventTypeChange}
+                                    required>
+                                </lightning-radio-group>
+                                <template if:false={showMultiInput}>
+                                    <lightning-input type="datetime" class="inputDate" label="Enter a date"
+                                        value={tempDate} required>
+                                    </lightning-input>
+                                </template>
+                                <template if:true={showMultiInput}>
+                                    <lightning-input type="datetime" class="inputStartDate" value={tempDate}
+                                        label="Enter the start date:" required>
+                                    </lightning-input>
+                                    <lightning-input type="datetime" class="inputEndDate" label="Enter the end date:"
+                                        required>
+                                    </lightning-input>
+                                </template>
+                                <lightning-input label="Title" class="inputEvent" required></lightning-input>
+                                <lightning-input label="Description" class="inputDescription"></lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <template if:false={onProcess}>
+                            <button class="slds-button slds-button_neutral" onclick={toHideCreateModal}>Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick={confirmInfo}>Save</button>
+                        </template>
+                        <template if:true={onProcess}>
+                            <button class="slds-button slds-button_neutral" onclick={toHideCreateModal}
+                                disabled>Cancel</button>
+                            <button class="slds-button slds-button_brand" onclick={confirmInfo}
+                                disabled>Waiting...</button>
+                        </template>
+
+                    </footer>
+                </div>
+            </section>
+            <div class={createBackdropCss}></div>
+        </div>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-2" class={detailModalCss}>
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <!-- <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                            title="Close" data-type="close" onclick={toHideDetailModal}>
+                            <span>
+                                <lightning-icon icon-name="utility:close" alternative-text="close" size="small"
+                                    variant="inverse">
+                                </lightning-icon>
+                            </span>
+                            <span class="slds-assistive-text">Close</span>
+                        </button> -->
+                        <h2 class="slds-text-heading_large slds-hyphenate">
+                            Detail:
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <div class="slds-grid slds-grid_align-center">
+                            <div class="slds-size_2-of-3">
+                                <template if:false={detailModalIfMulti}>
+                                    <template if:true={detailModalStatus}>
+                                        <lightning-input type="datetime" class="inputDateEdit" label="Enter a date"
+                                            required value={dateTempEdit}>
+                                        </lightning-input>
+                                        <lightning-input label="Title" class="inputEventEdit" required
+                                            value={titleTempEdit}></lightning-input>
+                                        <lightning-input label="Description" class="inputDescriptionEdit"
+                                            value={descriptionTempEdit}></lightning-input>
+                                    </template>
+                                    <template if:false={detailModalStatus}>
+                                        <div class="slds-grid slds-grid_vertical">
+                                            <div class="slds-text-heading_small">Time:<br></div>
+                                            <div class="slds-text-body_small slds-text-align_left">{dateTempForUser}
+                                            </div>
+                                            <div class="slds-text-heading_small">Title:<br></div>
+                                            <div class="slds-text-body_small slds-text-align_left">{titleTemp}</div>
+                                            <template if:true={descriptionTemp}>
+                                                <div class="slds-text-heading_small">Description:<br></div>
+                                                <div class="slds-text-body_small slds-text-align_left">{descriptionTemp}
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+                                <template if:true={detailModalIfMulti}>
+                                    <template if:true={detailModalStatus}>
+                                        <lightning-input type="datetime" class="inputStartDateEdit"
+                                            label="Enter a start date" required value={dateStartTempEdit}>
+                                        </lightning-input>
+                                        <lightning-input type="datetime" class="inputEndDateEdit"
+                                            label="Enter an end date" required value={dateEndTempEdit}>
+                                        </lightning-input>
+                                        <lightning-input label="Title" class="inputEventEdit" required
+                                            value={titleTempEdit}></lightning-input>
+                                        <lightning-input label="Description" class="inputDescriptionEdit"
+                                            value={descriptionTempEdit}></lightning-input>
+                                    </template>
+                                    <template if:false={detailModalStatus}>
+                                        <div class="slds-grid slds-grid_vertical">
+                                            <div class="slds-text-heading_small">Start time:<br></div>
+                                            <div class="slds-text-body_small slds-text-align_left">
+                                                {dateStartTempForUser}
+                                            </div>
+                                            <div class="slds-text-heading_small">End time:<br></div>
+                                            <div class="slds-text-body_small slds-text-align_left">{dateEndTempForUser}
+                                            </div>
+                                            <div class="slds-text-heading_small">Title:<br></div>
+                                            <div class="slds-text-body_small slds-text-align_left">{titleTemp}</div>
+                                            <template if:true={descriptionTemp}>
+                                                <div class="slds-text-heading_small">Description:<br></div>
+                                                <div class="slds-text-body_small slds-text-align_left">{descriptionTemp}
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer slds-grid slds-grid_align-end">
+                        <template if:true={detailModalStatus}>
+                            <template if:false={onProcess}>
+                                <button class="slds-button slds-button_neutral" onclick={backToDetail}>Cancel</button>
+                                <button class="slds-button slds-button_brand" onclick={toSaveEdit}>Save</button>
+                            </template>
+                            <template if:true={onProcess}>
+                                <button class="slds-button slds-button_neutral" onclick={backToDetail}
+                                    disabled>Cancel</button>
+                                <button class="slds-button slds-button_brand" onclick={toSaveEdit}
+                                    disabled>Waiting...</button>
+                            </template>
+                        </template>
+                        <template if:false={detailModalStatus}>
+                            <div>
+                                <template if:false={onProcess}>
+                                    <button class="slds-button slds-button_destructive"
+                                        onclick={toDeleteEvent}>Delete</button>
+                                </template>
+                                <template if:true={onProcess}>
+                                    <button class="slds-button slds-button_destructive" onclick={toDeleteEvent}
+                                        disabled>Waiting...</button>
+                                </template>
+                            </div>
+                            <div class="slds-col_bump-left">
+                                <template if:false={onProcess}>
+                                    <button class="slds-button slds-button_neutral" onclick={toEdit}>Edit</button>
+                                    <button class="slds-button slds-button_brand"
+                                        onclick={toHideDetailModal}>Done</button>
+                                </template>
+                                <template if:true={onProcess}>
+                                    <button class="slds-button slds-button_neutral" disabled>Edit</button>
+                                    <button class="slds-button slds-button_brand" onclick={toHideDetailModal}
+                                        disabled>Done</button>
+                                </template>
+                            </div>
+                        </template>
+                    </footer>
+                </div>
+            </section>
+            <div class={detailBackdropCss}></div>
+        </div>
+        <div>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-2" class={monthYearModalCss}>
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_large slds-hyphenate">
+                            Please choose month and year:
+                        </h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-3">
+                        <div class="slds-grid slds-grid_align-center">
+                            <div class="slds-size_2-of-3">
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer slds-grid slds-grid_align-end">
+                        <button class="slds-button slds-button_neutral" onclick={toHideMonthYearModal}>Cancel</button>
+                        <button class="slds-button slds-button_brand">Confirm</button>
+                    </footer>
+                </div>
+            </section>
+            <div class={monthYearBackdropCss}></div>
+        </div>
+    </div>
+</template>

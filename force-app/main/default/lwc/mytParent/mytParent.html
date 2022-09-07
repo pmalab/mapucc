@@ -1,0 +1,23 @@
+<template>
+    <lightning-card>
+        <div>
+            hello parent
+        </div>
+        <span if:true={nameIsExist}>
+            Hello, {name}
+        </span>
+        <div>
+            <div class="slds-show_inline-block">
+                <lightning-input data-id="nameInput" label="Name" value={name} onchange={handleChange}>
+                </lightning-input>
+            </div>
+            <lightning-button class="slds-var-m-around_small slds-show_inline-block" variant="Neutral" 
+            label="Add" onclick={handleAddName}></lightning-button>
+        </div>
+        <br/>
+       
+        <c-myt-child class="child-component" if:true={showLifeCycle} name-list-in-parent={nameListInParent} onnamechanged={handleChildChanged}></c-myt-child>
+        <lightning-button class="slds-var-m-vertical_small slds-show_inline-block" variant="Neutral"
+        label="Remove Lifecycle" onclick={handleRemove}></lightning-button>
+    </lightning-card>
+</template>

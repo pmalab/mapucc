@@ -1,0 +1,24 @@
+<template>
+    <div>
+        hello child
+    </div>
+    <br/>
+    <ul>
+        <template for:each={nameListInParent} for:item="parent" for:index="index">
+          <li key={parent}>
+              {parent}
+              <lightning-button class="slds-var-m-around_small slds-show_inline-block" variant="Neutral" 
+              label="Remove" onclick={handleRemove} data-name={parent}></lightning-button>
+          </li>
+        </template>
+    </ul>
+    <br/>
+
+    <ul>
+        <template for:each={nameListInChild} for:item="child" for:index="index">
+            <li key={child}>
+                {child}
+            </li>
+        </template>
+    </ul>
+</template>
