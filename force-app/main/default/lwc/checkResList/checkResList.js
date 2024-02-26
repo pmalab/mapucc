@@ -31,7 +31,7 @@ import NAME from '@salesforce/schema/Reimbursement__c.Name';
 import RES_ID from '@salesforce/schema/Reimbursement__c.Id';
 import TOTAL_MONEY from '@salesforce/schema/Reimbursement__c.totalmoney__c';
 import RES_OBJECT from '@salesforce/schema/Reimbursement__c';
-import getCases from '@salesforce/apex/CmpCheckResListController.getResDetails';
+import getCases from '@salesforce/apex/AccountController.getRequest';
 
 const fields = [NAME, RES_ID, TOTAL_MONEY];
 
@@ -76,7 +76,7 @@ export default class CheckResList extends NavigationMixin(LightningElement) {
     }
 
     connectedCallback() {
-        this.getRelateDetailList();
+        this.getRe();
     }
 
     getRelateDetailList(){

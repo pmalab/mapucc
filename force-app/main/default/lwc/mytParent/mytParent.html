@@ -13,6 +13,8 @@
             </div>
             <lightning-button class="slds-var-m-around_small slds-show_inline-block" variant="Neutral" 
             label="Add" onclick={handleAddName}></lightning-button>
+            <lightning-button if:true={testFalse} class="slds-var-m-around_small slds-show_inline-block" variant="Neutral" 
+            label="test" onclick={handleAddName} data-testfalse={testFalse}></lightning-button>
         </div>
         <br/>
        

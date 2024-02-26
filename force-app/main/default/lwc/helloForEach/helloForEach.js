@@ -1,5 +1,11 @@
-import { LightningElement } from 'lwc';
-
+import {
+    LightningElement,
+    track,
+    wire,
+    api
+} from 'lwc';
+import getRequest from '@salesforce/apex/AccountController.getRequest';
+import submitRequest from '@salesforce/apex/AccountController.submitRequest';
 export default class HelloForEach extends LightningElement {
     contacts = [
         {
@@ -18,4 +24,30 @@ export default class HelloForEach extends LightningElement {
             Title: 'CEO',
         },
     ];
+@track lstResult;
+    connectedCallback() {
+        this.getRequest();
+    }
+
+    getRequest(){
+        getRequest().then(result => {
+            this.lstResult = result;
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSpin = false;
+            console.log('ERROR ' + JSON.stringify(error));
+        });
+    }
+
+    submitRequest(){
+        submitRequest({resultWrapper: this.lstResult}).then(result => {
+            this.lstResult = result;
+        })
+        .catch(error => {
+            this.error = error;
+            this.showSpin = false;
+            console.log('ERROR ' + JSON.stringify(error));
+        });
+    }
 }

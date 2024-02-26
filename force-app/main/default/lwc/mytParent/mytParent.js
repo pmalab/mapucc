@@ -16,6 +16,9 @@ export default class MytParent extends LightningElement {
     nameIsExist = true;
 
     @track
+    testFalse = true;
+
+    @track
     nameListInParent = [];
 
     connectedCallback(){
@@ -49,7 +52,9 @@ export default class MytParent extends LightningElement {
         return this.nameListInParent.length>0 ? true : false;
     }
 
-    handleAddName(){
+    handleAddName(event){
+        let result = event.target.getAttribute('data-testfalse');
+        console.log('result==>>'+result);
         this.nameListInParent.push(this.name);
     }
 
