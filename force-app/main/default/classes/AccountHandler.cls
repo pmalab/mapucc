@@ -6,7 +6,6 @@ public without sharing class AccountHandler {
     	Account acc = new Account();
     	acc.Name = name;
     	acc.Phone = '15732029254';
-
     	try{
 
     		INSERT acc;

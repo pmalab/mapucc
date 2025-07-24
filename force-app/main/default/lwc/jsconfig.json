@@ -53,6 +53,9 @@
             ],
             "c/myFirstWebComponent": [
                 "myFirstWebComponent/myFirstWebComponent.js"
+            ],
+            "c/*": [
+                "*"
             ]
         }
     },
